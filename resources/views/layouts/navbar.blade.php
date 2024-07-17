@@ -8,7 +8,7 @@
             <ul class="navbar-nav ">
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-house-door-fill "></i>
-                    <a class="nav-link active" aria-current="page" href="#">HOME</a>
+                    <a class="nav-link {{ request()->is('l')? 'active':''}}" aria-current="page" href="#">HOME</a>
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-info-circle"></i>
@@ -21,13 +21,13 @@
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
 
-                    <i class="bi bi-cup"></i>
-                    <a class="nav-link" href="#">LOGIN</a>
+                    <i class="bi bi-box-arrow-in-left"></i>
+                    <a class="nav-link {{ request()->is('login')? 'active':''}}" href="#">LOGIN</a>
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
 
-                    <i class="bi bi-cup"></i>
-                    <a class="nav-link" href="#">REGISTRATION</a>
+                    <i class="bi bi-person-badge"></i>
+                    <a class="nav-link {{ request()->is('register')? 'active':''}}" href="#">REGISTRATION</a>
                 </li>
             </ul>
         </div>

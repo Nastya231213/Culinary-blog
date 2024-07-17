@@ -3,7 +3,7 @@
 @section('title','Login')
 @section('content')
 <div class="container">
-    <div class="row w-75  mx-auto " id="loginForm">
+    <div class="row w-75  mx-auto " id="authenticationForm">
         <div class="col-sm-6 text-black">
 
             <div class="d-flex align-items-center h-custom-2  ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
@@ -35,7 +35,7 @@
 
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">
-            <img src="https://d2uqfpnktc64mn.cloudfront.net/uploads/post/image/000/001/969/default_Image-by-Leigh-Beisch-Untitled-Winner-Winner-of-Pink-Lady-Food-Photographer-of-the-Year.jpg" alt="Login image" class="w-100 h-100" style="object-fit: cover; object-position: left;">
+            <img src="{{ asset('images/login-image.jpg') }}" alt="Login image" class="w-100 h-100" style="object-fit: cover; object-position: left;">
         </div>
     </div>
 </div>

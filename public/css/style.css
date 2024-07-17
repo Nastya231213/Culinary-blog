@@ -62,31 +62,7 @@ body {
     font-weight: 500;
 }
 
-@media (max-width: 576px) {
-    .navbar .navbar-brand {
-        font-size: 20px;
-    }
-}
 
-@media (max-width: 992px) {
-    .navbar-nav {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .nav-item {
-        margin-left: 0px !important;
-        margin-top: 10px;
-        ;
-    }
-
-    .secondary-navbar {
-        border-top: none !important;
-        border-bottom: none !important;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-    }
-}
 
 /*Footer*/
 
@@ -137,10 +113,11 @@ footer a:hover {
 
 footer .company-info {
     justify-self: flex-start;
+    font-weight: 300;
 }
 
-/*Login page*/
-#loginForm {
+/*Authentication pages*/
+#authenticationForm {
     background-color: rgb(235, 235, 235);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid transparent;
@@ -148,7 +125,45 @@ footer .company-info {
 
 }
 
-#loginForm .btn {
+#authenticationForm .btn {
     background-color: rgb(19, 192, 19);
     color: #fff;
+    border: 2px solid  #cacaca;
+}
+#authenticationForm .btn:hover {
+    background-color: rgb(20, 173, 20);
+
+}
+#authenticationForm input{
+font-size:17px;
+}
+@media (max-width: 576px) {
+    .navbar .navbar-brand {
+        font-size: 20px;
+    }
+    #authenticationForm{
+        border-radius:5px;
+        border:2px solid #cacaca;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-item {
+        margin-left: 0px !important;
+        margin-top: 10px;
+        ;
+    }
+
+    .secondary-navbar {
+        border-top: none !important;
+        border-bottom: none !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    }
+
 }
