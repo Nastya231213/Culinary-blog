@@ -88,12 +88,14 @@ footer .container {
 
 footer ul {
     list-style: none;
-    padding:0px;
+    padding: 0px;
 
 }
-footer .company-info{
+
+footer .company-info {
     font-size: 17px;
 }
+
 .footer-heading {
     font-family: "Playwrite AU QLD", cursive;
     font-size: 20px;
@@ -128,22 +130,26 @@ footer .company-info {
 #authenticationForm .btn {
     background-color: rgb(19, 192, 19);
     color: #fff;
-    border: 2px solid  #cacaca;
+    border: 2px solid #cacaca;
 }
+
 #authenticationForm .btn:hover {
     background-color: rgb(20, 173, 20);
 
 }
-#authenticationForm input{
-font-size:17px;
+
+#authenticationForm input {
+    font-size: 17px;
 }
+
 @media (max-width: 576px) {
     .navbar .navbar-brand {
         font-size: 20px;
     }
-    #authenticationForm{
-        border-radius:5px;
-        border:2px solid #cacaca;
+
+    #authenticationForm {
+        border-radius: 5px;
+        border: 2px solid #cacaca;
     }
 }
 
@@ -166,4 +172,66 @@ font-size:17px;
 
     }
 
+}
+
+/*Admin*/
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #343a40; 
+
+    width: 250px;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: 0.5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.toggle-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 101;
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    background-color: #343a40; 
+
+}
+.pressed{
+color:#343a40;
+ background-color: #fff;
+}
+
+.main-content-expanded {
+    margin-left: 0;
+    padding: 50px;
+}
+
+.sidebar-hidden {
+    transform: translateX(-100%);
+}
+.sidebar .nav-link {
+    color: #ffffff; /* Измените этот цвет для текста */
+}
+
+.sidebar .nav-link.active {
+    background-color: #495057; /* Измените этот цвет для активной ссылки */
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -19,4 +20,5 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/')->with('successMessage', 'Your account is verified successfully.');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-
+Route::get('admin',[AdminController::class,'index'])->name('admin.dashboard');
+Route::get('admin',[AdminController::class,'index3'])->name('admin.dashboard');
