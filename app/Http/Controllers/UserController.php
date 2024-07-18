@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -33,8 +34,32 @@ class UserController extends Controller
         );
         Auth::login($user);
         $user->sendEmailVerificationNotification();
-        
-        return redirect()->route('home')->with('success', 'Registration successful!');
 
+        return redirect()->route('home')->with('successMessage', 'Registration successful! A verification email has been sent.');
+    }
+    public function login(Request $request)
+    {
+        $request->validate(
+            [
+                'email' => 'required',
+                'password' => 'required'
+            ]
+        );
+        $credentails = $request->only('email', 'password');
+        if (Auth::attempt($credentails)) {
+            if (!auth()->user()->is_admin) {
+                return redirect()->to('/');
+            } else {
+                
+            }
+        }
+        return redirect()->back()->with('errorMessage', 'Invalid email or password. Please try again.');
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('home');
     }
 }

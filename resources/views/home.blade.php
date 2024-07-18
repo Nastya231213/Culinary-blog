@@ -2,5 +2,5 @@
 
 @section('title', 'Registration')
 @section('content')
-
+@include('message')
 @endsection

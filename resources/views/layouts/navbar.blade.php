@@ -8,7 +8,7 @@
             <ul class="navbar-nav ">
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-house-door-fill "></i>
-                    <a class="nav-link {{ request()->is('l')? 'active':''}}" aria-current="page" href="#">HOME</a>
+                    <a class="nav-link {{ request()->is('login')? 'active':''}}" aria-current="page" href="{{ route('home')}}">HOME</a>
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-info-circle"></i>
@@ -19,16 +19,27 @@
                     <i class="bi bi-cup"></i>
                     <a class="nav-link" href="#">BLOG</a>
                 </li>
+                @if(Auth::check())
+                <li class="nav-item d-flex flex-column align-items-center">
+                    <i class="bi bi-box-arrow-right mb-2"></i>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="nav-link btn btn-link p-0" style="border: none; background: none;">LOGOUT</button>
+                    </form>
+                </li>
+
+                @else
                 <li class="nav-item d-flex flex-column align-items-center">
 
                     <i class="bi bi-box-arrow-in-left"></i>
-                    <a class="nav-link {{ request()->is('login')? 'active':''}}" href="#">LOGIN</a>
+                    <a class="nav-link {{ request()->is('login')? 'active':''}}" href="{{route('login.form')}}">LOGIN</a>
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
 
                     <i class="bi bi-person-badge"></i>
-                    <a class="nav-link {{ request()->is('register')? 'active':''}}" href="#">REGISTRATION</a>
+                    <a class="nav-link {{ request()->is('register')? 'active':''}}" href="{{route('register.form')}}">REGISTRATION</a>
                 </li>
+                @endif
             </ul>
         </div>
     </div>
