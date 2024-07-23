@@ -1,0 +1,201 @@
+.sidebar {
+    top: 120px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #343a40;
+    width: 20vw;
+    height: 120vh;
+    transition: transform 0.3s ease, width 0.3s ease;
+    /* Added transition */
+}
+
+/* Main Content Styles */
+.main-content {
+    margin-left: 20vw;
+    margin-top: 19vh;
+    ;
+    padding: 20px;
+    transition: margin-left 0.3s ease, padding 0.3s ease;
+    /* Added transition */
+}
+
+/* Sidebar Sticky Styles */
+.sidebar-sticky {
+    position: relative;
+    top: 10px;
+    ;
+    height: calc(150vh - 48px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: padding-top 0.3s ease;
+    /* Added transition */
+}
+
+/* Toggle Button Styles */
+.toggle-btn {
+    position: absolute;
+    top: 130px;
+    position: fixed;
+    left: 15px;
+    z-index: 101;
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    background-color: #343a40;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Added transition */
+}
+
+/* Pressed State Styles */
+.pressed {
+    color: #343a40;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Added transition */
+}
+
+/* Expanded Main Content */
+.main-content-expanded {
+    margin-left: 0;
+    padding: 50px;
+    transition: margin-left 0.3s ease, padding 0.3s ease;
+    /* Added transition */
+}
+
+/* Sidebar Hidden */
+.sidebar-hidden {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+/* Sidebar Nav Link Styles */
+.sidebar .nav-link {
+    color: #ffffff;
+    transition: color 0.3s ease;
+    /* Added transition */
+}
+
+.sidebar .nav-link.active {
+    background-color: #495057;
+}
+
+
+.pagination {
+    justify-content: center;
+}
+
+.page-item {
+    border: 1px solid #000;
+}
+
+.page-link {
+    color: #000 !important;
+    background-color: #fff;
+    border-color: #000;
+}
+
+.page-item.active .page-link {
+    color: #fff !important;
+    background-color: #000;
+    /* Active page background color */
+    border-color: #000;
+    /* Active page border color */
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    background-color: #fff;
+    border-color: #ddd;
+}
+
+.navbar {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    width: 100%;
+    position: fixed !important;
+    ;
+    z-index: 102;
+    min-height: 120px;
+}
+
+@media (max-width:772px) {
+   
+ .sidebar {
+        width: 40vw !important;
+    }
+    .main-content {
+        margin-left: 40vw;
+    }
+
+}
+
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 10px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    .table th,
+    .table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table,
+    .table tbody,
+    .table tr,
+    .table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .table td {
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 10px;
+        font-weight: bold;
+        white-space: nowrap;
+        background: #f8f9fa;
+    }
+}
+
+@media (max-width: 768px) {
+  
+    #add-user-form{
+        width:50vw;
+    }
+}
+
+@media (min-width: 768px) {
+    #add-user-form{
+        width:40vw;
+    }
+}

@@ -1,6 +1,6 @@
 @extends('layouts.admin.admin_main')
 @section('title', 'Dashboard')
-
+@section('content')
 <div class="main-content" id="mainContent">
     <h1 class="mb-4">Dashboard</h1>
     <div class="row">
@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Users <i class="bi bi-people-fill"></i></h5>
                     <p class="card-text">Total users: </p>
-                    <a href="#" class="btn btn-primary">View All Users</a>
+                    <a href="{{route('admin.users')}}" class="btn btn-primary">View All Users</a>
                 </div>
             </div>
         </div>
@@ -33,3 +33,4 @@
         </div>
     </div>
 </div>
+@endsection

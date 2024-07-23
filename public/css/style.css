@@ -36,6 +36,7 @@ body {
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-size: 18px;
+    width:100%;
 
 }
 
@@ -43,6 +44,7 @@ body {
     margin-top: 10px;
     border-top: 2px solid #000;
     border-bottom: 2px solid #000;
+
 
 
 }
@@ -174,64 +176,4 @@ footer .company-info {
 
 }
 
-/*Admin*/
-.sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    padding: 48px 0 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #343a40; 
-
-    width: 250px;
-}
-
-.main-content {
-    margin-left: 250px;
-    padding: 20px;
-    transition: margin-left 0.3s ease;
-}
-
-
-.sidebar-sticky {
-    position: relative;
-    top: 0;
-    height: calc(100vh - 48px);
-    padding-top: 0.5rem;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-.toggle-btn {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 101;
-    color: #fff;
-    border: none;
-    font-size: 24px;
-    background-color: #343a40; 
-
-}
-.pressed{
-color:#343a40;
- background-color: #fff;
-}
-
-.main-content-expanded {
-    margin-left: 0;
-    padding: 50px;
-}
-
-.sidebar-hidden {
-    transform: translateX(-100%);
-}
-.sidebar .nav-link {
-    color: #ffffff; /* Измените этот цвет для текста */
-}
-
-.sidebar .nav-link.active {
-    background-color: #495057; /* Измените этот цвет для активной ссылки */
-}
+/* Sidebar Styles */
