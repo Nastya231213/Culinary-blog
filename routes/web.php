@@ -23,3 +23,4 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::get('admin',[AdminController::class,'index'])->name('admin.dashboard');
 Route::get('admin/users',[AdminController::class,'showUsers'])->name('admin.users');
 Route::get('admin/users/create',[AdminController::class,'createUser'])->name('admin.users.create');
+Route::post('admin/users/store',[UserController::class,'storeUser'])->name('admin.users.store');
