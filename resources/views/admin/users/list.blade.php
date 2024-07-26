@@ -10,6 +10,7 @@
                 <i class="bi bi-plus"></i> Add New User
             </a>
         </div>
+        @include('message')
         <div class="table-responsive">
 
             <table class="table striped mt-5">
@@ -34,15 +35,14 @@
                         <td>{{ $user->is_admin ? 'Yes' : 'No' }}</td>
 
                         <td>
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-primary btn-sm">Edit</a>
 
-                            <form action="" method="POST" style="display:inline;">
+                            <form action="{{route('admin.users.delete',$user->id)}}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
                             </form>
                         </td>
-
                     </tr>
                     @endforeach
 

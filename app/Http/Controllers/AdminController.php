@@ -23,4 +23,9 @@ class AdminController extends Controller
 
         return view('admin.users.create');
     }
+
+    public function editUser(User $user){
+
+        return view('admin.users.edit',compact('user'));
+    }
 }

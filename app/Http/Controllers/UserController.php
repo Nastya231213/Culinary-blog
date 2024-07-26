@@ -8,6 +8,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -86,5 +87,43 @@ class UserController extends Controller
             'New user added successfully! User' . $request->input('fullName') . ' ('
                 . $request->input('email') . ' ) has been created with role ' . ($request->has('is_admin') ? 'Administrator' : 'User') . '.'
         );
+    }
+    public function deleteUser(User $user)
+    {
+
+        $user->delete();
+        return redirect()->route('admin.users')->with('successMessage', 'User deleted successfully!');
+    }
+    public function updateUser(Request $request, User $user)
+    {
+        $validatedData = $request->validate(
+
+            [
+                'full_name' => 'required|string|max:255',
+                'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+                'current_password' => 'sometimes|required_with:new_password|current_password',
+                'new_password' => 'sometimes|nullable|min:8|confirmed',
+                'profile_photo' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+
+            ]
+        );
+        $user->full_name = $validatedData['full_name'];
+        $user->email = $validatedData['email'];
+        if ($request->filled('new_password')) {
+            if (Hash::check($request->input('current_password'), $user->password)) {
+                $user->password = Hash::make($validatedData['new_password']);
+            } else {
+                return redirect()->back()->withMessage(['errorMessage' => 'Wrong password']);
+            }
+        }
+        if ($request->hasFile('profile_photo')) {
+            $photo = $request->file('profile_photo');
+            $photoPath = $photo->store('profile_photos', 'public');
+            $user->profile_photo = basename($photoPath);
+        }
+        
+        $user->save();
+        return redirect()->route('admin.users')
+        ->with('successMessage', "User '{$user->name}' (ID: {$user->id}) has been updated successfully.");
     }
 }

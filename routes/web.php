@@ -19,8 +19,11 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
     return redirect('/')->with('successMessage', 'Your account is verified successfully.');
 })->middleware(['auth', 'signed'])->name('verification.verify');
-
+//Admin panel - Users
 Route::get('admin',[AdminController::class,'index'])->name('admin.dashboard');
 Route::get('admin/users',[AdminController::class,'showUsers'])->name('admin.users');
 Route::get('admin/users/create',[AdminController::class,'createUser'])->name('admin.users.create');
 Route::post('admin/users/store',[UserController::class,'storeUser'])->name('admin.users.store');
+Route::delete('admin/users/{user}',[UserController::class,'deleteUser'])->name('admin.users.delete');
+Route::put('admin/users/{user}',[UserController::class,'updateUser'])->name('admin.users.update');
+Route::get('admin/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');

@@ -5,8 +5,17 @@ document.addEventListener('DOMContentLoaded', function() {
     var cropper;
     var cropperModal = new bootstrap.Modal(document.getElementById('cropper-modal'));
     var cropButton = document.getElementById('crop-button');
+    var cancelButton=document.getElementById('cancel_button');
 
     var fileToCrop;
+    cancelButton.addEventListener('click', function() {
+        if (cropper) {
+            cropper.destroy();
+            cropper = null;
+        }
+        imageInput.value = ''; 
+        preview.style.display='none';
+    });
 
     imageInput.addEventListener('change', function(event) {
         var files = event.target.files;

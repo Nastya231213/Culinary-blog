@@ -4,19 +4,20 @@
 
 
 <div class="main-content" id="mainContent">
-    <a href="{{route('admin.users')}}" class="btn btn-primary">
+    <a href="{{route('admin.users.update',$user->id)}}" class="btn btn-primary">
         <i class="bi bi-arrow-left"></i> All Users
     </a>
-    <form action="{{route('admin.users.edit')}}" id="add-user-form" method="POST" enctype="multipart/form-data" class="mx-auto border rounded p-4">
+    <form action="{{route('admin.users.update',$user->id)}}" id="add-user-form" method="POST" enctype="multipart/form-data" class="mx-auto border rounded p-4">
         @csrf
-        <h3 class="my-4 text-center">Add User</h3>
+        @method('PUT')
+        <h3 class="my-4 text-center">Edit User</h3>
 
         @include('message')
 
         <div class="row mb-3">
             <label for="name" class="col-sm-2 col-form-label">Name</label>
             <div class="col-md-12 col-lg-10">
-                <input type="text" class="form-control" id="name" name="fullName" required>
+                <input type="text" class="form-control" value="{{!empty($user->full_name)? $user->full_name:''}}" id="name" name="full_name" required>
             </div>
             @if($errors->has('fullName'))
             <div class="alert alert-danger error-message" role="alert">
@@ -28,7 +29,7 @@
         <div class="row mb-3">
             <label for="email" class="col-sm-2  col-form-label">Email</label>
             <div class=" col-md-12 col-lg-10">
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" value="{{!empty($user->email)? $user->email:''}}" name="email" required>
             </div>
             @if($errors->has('email'))
             <div class="alert alert-danger error-message" role="alert">
@@ -40,7 +41,7 @@
         <div class="row mb-3">
             <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-md-12 col-lg-10">
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="current_password" name="password" >
             </div>
             @if($errors->has('password'))
             <div class="alert alert-danger error-message" role="alert">
@@ -49,34 +50,29 @@
             @endif
         </div>
         <div class="row mb-3">
+            <label for="password" class="col-sm-2 col-form-label">New password</label>
+            <div class="col-md-12 col-lg-10">
+                <input type="password" class="form-control" id="password" name="new_password" >
+            </div>
+
+        </div>
+        <div class="row mb-3">
             <label for="password" class="col-sm-2 col-form-label">Confirm password</label>
             <div class="col-md-12 col-lg-10">
-                <input type="password" class="form-control" id="password" name="password_confirmation" required>
+                <input type="password" class="form-control" id="password" name="new_password_confirmation">
             </div>
 
         </div>
 
-
-        <div class="row mb-3">
-
-            <label for="is_admin" class="col-sm-2 col-form-label">Admin</label>
-            <div class="col-md-12 col-lg-10">
-                <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin">
-                <label class="form-check-label fs-6 fs-md-5" for="is_admin">Check if the user should be an admin</label>
-            </div>
-            @if($errors->has('admin'))
-            <div class="alert alert-danger error-message" role="alert">
-                {{$errors->first('admin')}}
-            </div>
-            @endif
-        </div>
         <div class="row mb-3">
             <label for="profile_photo" class="col-sm-2 col-form-label">Profile Photo</label>
             <div class=" col-sm-10">
                 <input type="file" class="form-control mt-3" id="profile_photo" name="profile_photo" accept="image/*">
                 <div class="mt-2">
-                    <img id="photo_preview" src="" width="150" alt="Image preview" style="display:none;">
+
+                    <img id="photo_preview" class="{{$user->profile_photo!=null?'show':'hide' }}" src="{{ !empty($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}" style="width: 150px;" alt="Image preview">
                 </div>
+
             </div>
             @if($errors->has('profile_photo'))
             <div class="alert alert-danger error-message" role="alert">
@@ -87,7 +83,7 @@
 
         <div class="row mb-3">
             <div class="mx-auto col-sm-6">
-                <button type="submit" class="btn btn-primary w-100">Add User</button>
+                <button type="submit" class="btn btn-primary w-100">Edit User</button>
             </div>
         </div>
     </form>
@@ -105,7 +101,7 @@
                 <img id="crop-image" src="" alt="Crop Image" style="max-width: 100%;">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="cancel_button" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="crop-button">Crop & Upload</button>
             </div>
         </div>
