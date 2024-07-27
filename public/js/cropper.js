@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
             preview.style.display = 'block';
             cropperModal.hide();
         }, 'image/jpeg');
-    });
+    });e
     document.getElementById('cropper-modal').addEventListener('show.bs.modal', function () {
         if (cropper) {
             var canvas = cropper.getCroppedCanvas({

@@ -37,6 +37,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/', [AdminController::class, 'showCategories'])->name('index');
             Route::get('create', [AdminController::class, 'createCategory'])->name('create');
             Route::post('store', [CategoryController::class, 'storeCategory'])->name('store');
+            Route::delete('{category}', [CategoryController::class, 'deleteCategory'])->name('delete');
+            Route::get('{category}/edit', [AdminController::class, 'editCategory'])->name('edit');
+            Route::put('{category}', [CategoryController::class, 'updateCategory'])->name('update');
 
         }
     );

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function storeCategory(Request $request)
+    public function storeCategory(StoreCategoryRequest $request)
     {
         $photoPath = null;
         if ($request->hasFile('photo')) {
@@ -23,7 +23,37 @@ class CategoryController extends Controller
                 'image' => $photoPath,
             ]
         );
-        
+
         return redirect()->route('admin.categories.index')->with('success', 'Category added successfully');
+    }
+    public function deleteCategory(Category $category)
+    {
+
+        $category->delete();
+        return redirect()->route('admin.categories.index')->with('successMessage', 'Category deleted successfully!');
+    }
+
+
+    public function updateCategory(StoreCategoryRequest $request, Category $category)
+    {
+        $validatedData = $request->validate(
+
+            [
+                'name' => 'required|string|max:255',
+                'category_photo' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+
+            ]
+        );
+        $category->name = $validatedData['name'];
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoPath = $photo->store('category_photos', 'public');
+            $category->image = basename($photoPath);
+        }
+        $category->save();
+
+        return redirect()->route('admin.categories.index')
+            ->with('successMessage', "Category '{$category->name}' (ID: {$category->id}) has been updated successfully.");
     }
 }

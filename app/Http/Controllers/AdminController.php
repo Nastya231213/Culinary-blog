@@ -40,4 +40,9 @@ class AdminController extends Controller
 
         return view('admin.users.edit',compact('user'));
     }
+    public function editCategory(Category $category){
+
+        
+        return view('admin.categories.edit',compact('category'));
+    }
 }
