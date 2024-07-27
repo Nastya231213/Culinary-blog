@@ -13,6 +13,11 @@
         @include('message')
         <div class="table-responsive">
 
+            @if($users->isEmpty())
+            <div class="alert alert-info text-center">
+                No users available.
+            </div>
+            @else
             <table class="table striped mt-5">
                 <thead>
                     <tr>
@@ -48,6 +53,7 @@
 
                 </tbody>
             </table>
+            @endif
             <div class="mt-4 p-4">
                 {{ $users->links('pagination::bootstrap-5') }}
             </div>

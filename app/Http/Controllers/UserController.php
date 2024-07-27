@@ -68,8 +68,8 @@ class UserController extends Controller
     {
 
         $profile_photo = null;
-        if ($request->hasFile('profile_photo')) {
-            $photo = $request->file('profile_photo');
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
             $photoPath = $photo->store('profile_photos', 'public');
             $profile_photo = basename($photoPath);
         }

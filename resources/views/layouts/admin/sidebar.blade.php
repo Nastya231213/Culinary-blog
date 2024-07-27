@@ -7,7 +7,7 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" href="{{route('admin.dashboard')}}">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
             </li>

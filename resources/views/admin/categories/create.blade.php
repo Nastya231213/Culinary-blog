@@ -4,76 +4,45 @@
 
 
 <div class="main-content" id="mainContent">
-    <a href="{{route('admin.users.index')}}" class="btn btn-primary">
-        <i class="bi bi-arrow-left"></i> All Users
+    <a href="{{route('admin.categories.index')}}" class="btn btn-primary">
+        <i class="bi bi-arrow-left"></i> All Categories
     </a>
-    <form action="{{route('admin.users.store')}}" id="add-user-form" method="POST" enctype="multipart/form-data" class="mx-auto border rounded p-4">
+    <form action="{{route('admin.categories.store')}}" id="add-user-form" method="POST" enctype="multipart/form-data" class="mx-auto border rounded p-4">
         @csrf
-        <h3 class="my-4 text-center">Add User</h3>
+        <h3 class="my-4 text-center">Add Category</h3>
 
         @include('message')
 
         <div class="row mb-3">
             <label for="name" class="col-sm-2 col-form-label">Name</label>
             <div class="col-md-12 col-lg-10">
-                <input type="text" class="form-control" id="name" name="fullName" required>
+                <input type="text" class="form-control" id="name" name="name" required>
             </div>
-            @if($errors->has('fullName'))
+            @if($errors->has('name'))
             <div class="alert alert-danger error-message" role="alert">
-                {{$errors->first('fullName')}}
+                {{$errors->first('name')}}
             </div>
             @endif
         </div>
-
         <div class="row mb-3">
-            <label for="email" class="col-sm-2  col-form-label">Email</label>
-            <div class=" col-md-12 col-lg-10">
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            @if($errors->has('email'))
-            <div class="alert alert-danger error-message" role="alert">
-                {{$errors->first('email')}}
-            </div>
-            @endif
-        </div>
-
-        <div class="row mb-3">
-            <label for="password" class="col-sm-2 col-form-label">Password</label>
+            <label for="parent_id" class="col-sm-2 col-form-label">Parent Category</label>
             <div class="col-md-12 col-lg-10">
-                <input type="password" class="form-control" id="password" name="password" required>
+                <select class="form-control" id="parent_id" name="parent_id">
+                    <option value="">Select Parent Category (optional)</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <small class="form-text text-muted">
+                    If you want to create a subcategory, select the parent category from the list. If not, leave it as "Select Parent Category".
+                </small>
             </div>
-            @if($errors->has('password'))
-            <div class="alert alert-danger error-message" role="alert">
-                {{$errors->first('password')}}
-            </div>
-            @endif
         </div>
+        
         <div class="row mb-3">
-            <label for="password" class="col-sm-2 col-form-label">Confirm password</label>
-            <div class="col-md-12 col-lg-10">
-                <input type="password" class="form-control" id="password" name="password_confirmation" required>
-            </div>
-
-        </div>
-
-
-        <div class="row mb-3">
-
-            <label for="is_admin" class="col-sm-2 col-form-label">Admin</label>
-            <div class="col-md-12 col-lg-10">
-                <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin">
-                <label class="form-check-label fs-6 fs-md-5" for="is_admin">Check if the user should be an admin</label>
-            </div>
-            @if($errors->has('admin'))
-            <div class="alert alert-danger error-message" role="alert">
-                {{$errors->first('admin')}}
-            </div>
-            @endif
-        </div>
-        <div class="row mb-3">
-            <label for="profile_photo" class="col-sm-2 col-form-label">Profile Photo</label>
+            <label for="profile_photo" class="col-sm-2 col-form-label">Category Photo</label>
             <div class=" col-sm-10">
-                <input type="file" class="form-control mt-3" id="photo" name="photo" data-image-type="profile" accept="image/*">
+                <input type="file" class="form-control mt-3" id="photo" name="photo" data-image-type="category" accept="image/*">
                 <div class="mt-2">
                     <img id="photo_preview" src="" width="150" alt="Image preview" style="display:none;">
                 </div>
@@ -84,7 +53,7 @@
             </div>
             @endif
         </div>
-        <div id="data-container" data-url="" ></div>
+        <div id="data-container" data-url=""></div>
 
         <div class="row mb-3">
             <div class="mx-auto col-sm-6">

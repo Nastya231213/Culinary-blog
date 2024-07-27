@@ -70,8 +70,10 @@
                 <input type="file" class="form-control mt-3" id="profile_photo" name="profile_photo" accept="image/*">
                 <div class="mt-2">
 
-                    <img id="photo_preview" class="{{$user->profile_photo!=null?'show':'hide' }}" src="{{ !empty($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}" style="width: 150px;" alt="Image preview">
+                    <img id="photo_preview" class="{{$user->profile_photo!=null?'show':'hide' }}"
+                     src="{{ !empty($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}" style="width: 150px;" alt="Image preview">
                 </div>
+                <div id="data-container" data-url="{{ !empty($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}" ></div>
 
             </div>
             @if($errors->has('profile_photo'))

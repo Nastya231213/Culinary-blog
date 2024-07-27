@@ -1,29 +1,37 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var imageInput = document.getElementById('profile_photo');
+document.addEventListener('DOMContentLoaded', function () {
+    var imageInput = document.getElementById('photo');
     var preview = document.getElementById('photo_preview');
     var cropImage = document.getElementById('crop-image');
     var cropper;
     var cropperModal = new bootstrap.Modal(document.getElementById('cropper-modal'));
     var cropButton = document.getElementById('crop-button');
-    var cancelButton=document.getElementById('cancel_button');
+    var cancelButton = document.getElementById('cancel_button');
+    var container = document.getElementById('data-container');
+    var url = container.getAttribute('data-url');
+    var imageType = imageInput.getAttribute('data-image-type');
+
 
     var fileToCrop;
-    cancelButton.addEventListener('click', function() {
-        if (cropper) {
-            cropper.destroy();
-            cropper = null;
+    var cropWidth;
+    var cropHeight;
+    defineImageType();
+
+    cancelButton.addEventListener('click', function () {
+  
+        imageInput.value = '';
+        preview.src = url;
+        if (url === '') {
+            preview.style.display = 'none';
         }
-        imageInput.value = ''; 
-        preview.style.display='none';
     });
 
-    imageInput.addEventListener('change', function(event) {
+    imageInput.addEventListener('change', function (event) {
         var files = event.target.files;
         if (files.length === 0) return;
         fileToCrop = files[0];
         var reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             cropImage.src = e.target.result;
             if (cropper) {
                 cropper.destroy();
@@ -42,16 +50,18 @@ document.addEventListener('DOMContentLoaded', function() {
         reader.readAsDataURL(fileToCrop);
 
     });
-    cropButton.addEventListener('click', function() {
+    cropButton.addEventListener('click', function () {
         if (!cropper) return;
 
+
+
         var canvas = cropper.getCroppedCanvas({
-            width: 400,
-            height: 400, 
+            width: cropWidth,
+            height: cropHeight,
         });
 
-        canvas.toBlob(function(blob) {
-            var file = new File([blob], 'profile_photo.jpg', {
+        canvas.toBlob(function (blob) {
+            var file = new File([blob], 'photo.jpg', {
                 type: 'image/jpeg'
             });
             var dataTransfer = new DataTransfer();
@@ -63,19 +73,33 @@ document.addEventListener('DOMContentLoaded', function() {
             cropperModal.hide();
         }, 'image/jpeg');
     });
-    document.getElementById('cropper-modal').addEventListener('show.bs.modal', function() {
+    document.getElementById('cropper-modal').addEventListener('show.bs.modal', function () {
         if (cropper) {
             var canvas = cropper.getCroppedCanvas({
-                width: 400,
-                height: 400
+                width: cropWidth,
+                height: cropHeight,
             });
 
-            canvas.toBlob(function(blob) {
+            canvas.toBlob(function (blob) {
                 var url = URL.createObjectURL(blob);
                 preview.src = url;
                 preview.style.display = 'block';
             });
         }
     });
+    function defineImageType() {
+        switch (imageType) {
+            case 'category':
+                cropHeight = 300;
+                cropWidth = 400;
+                break;
+            case 'profile':
+                cropHeight = 400;
+                cropWidth = 400;
+                break;
+
+        }
+    }
+
 
 });

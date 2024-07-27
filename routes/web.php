@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -19,11 +20,24 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
     return redirect('/')->with('successMessage', 'Your account is verified successfully.');
 })->middleware(['auth', 'signed'])->name('verification.verify');
-//Admin panel - Users
-Route::get('admin',[AdminController::class,'index'])->name('admin.dashboard');
-Route::get('admin/users',[AdminController::class,'showUsers'])->name('admin.users');
-Route::get('admin/users/create',[AdminController::class,'createUser'])->name('admin.users.create');
-Route::post('admin/users/store',[UserController::class,'storeUser'])->name('admin.users.store');
-Route::delete('admin/users/{user}',[UserController::class,'deleteUser'])->name('admin.users.delete');
-Route::put('admin/users/{user}',[UserController::class,'updateUser'])->name('admin.users.update');
-Route::get('admin/users/{user}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
+//Admin panel
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/', [AdminController::class, 'showUsers'])->name('index');
+        Route::get('create', [AdminController::class, 'createUser'])->name('create');
+        Route::post('store', [UserController::class, 'storeUser'])->name('store');
+        Route::delete('{user}', [UserController::class, 'deleteUser'])->name('delete');
+        Route::put('{user}', [UserController::class, 'updateUser'])->name('update');
+        Route::get('{user}/edit', [AdminController::class, 'editUser'])->name('edit');
+    });
+    Route::prefix('categories')->name('categories.')->group(
+        function () {
+            Route::get('/', [AdminController::class, 'showCategories'])->name('index');
+            Route::get('create', [AdminController::class, 'createCategory'])->name('create');
+            Route::post('store', [CategoryController::class, 'storeCategory'])->name('store');
+
+        }
+    );
+});

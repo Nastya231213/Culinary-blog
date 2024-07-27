@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Users <i class="bi bi-people-fill"></i></h5>
                     <p class="card-text">Total users: </p>
-                    <a href="{{route('admin.users')}}" class="btn btn-primary">View All Users</a>
+                    <a href="{{route('admin.users.index')}}" class="btn btn-primary">View All Users</a>
                 </div>
             </div>
         </div>
@@ -28,6 +28,15 @@
                     <h5 class="card-title">Comments <i class="bi bi-chat-dots-fill"></i></h5>
                     <p class="card-text">Total comments: 500</p>
                     <a href="#" class="btn btn-primary">View All Comments</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Categories <i class="bi bi-tags-fill"></i></h5>
+                    <p class="card-text">Total categories: 500</p>
+                    <a href="{{route('admin.categories.index')}}" class="btn btn-primary">View All Categories</a>
                 </div>
             </div>
         </div>
