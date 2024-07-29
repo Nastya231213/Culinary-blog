@@ -20,7 +20,7 @@
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-file-earmark-text"></i>
-                    <a class="nav-link {{ request()->is('admin/recipes') ? 'active' : '' }}" href="#">Recipes</a>
+                    <a class="nav-link {{ request()->is('admin/posts') ? 'active' : '' }}" href="{{ route('admin.posts.index') }}">Posts</a>
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-box-arrow-right"></i>

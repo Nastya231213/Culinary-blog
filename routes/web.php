@@ -43,15 +43,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('{category}', [CategoryController::class, 'deleteCategory'])->name('delete');
             Route::get('{category}/edit', [AdminController::class, 'editCategory'])->name('edit');
             Route::put('{category}', [CategoryController::class, 'updateCategory'])->name('update');
-
         }
     );
     Route::prefix('posts')->name('posts.')->group(
         function () {
             Route::get('create', [AdminController::class, 'createPost'])->name('create');
             Route::post('store', [PostController::class, 'storePost'])->name('store');
-
-
+            Route::get('/', [AdminController::class, 'showPosts'])->name('index');
+            Route::get('{id}', [PostController::class, 'showPost'])->name('show');
         }
     );
 });

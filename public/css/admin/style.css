@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+AU+QLD:wght@100..400&display=swap');
+
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
 .sidebar {
     top: 120px;
     position: fixed;
@@ -17,7 +28,6 @@
 .main-content {
     margin-left: 20vw;
     margin-top: 19vh;
-    ;
     padding: 20px;
     transition: margin-left 0.3s ease, padding 0.3s ease;
     /* Added transition */
@@ -60,7 +70,7 @@
 
 /* Expanded Main Content */
 .main-content-expanded {
-    margin-left: 0!important;
+    margin-left: 0 !important;
     padding: 50px;
     transition: margin-left 0.3s ease, padding 0.3s ease;
     /* Added transition */
@@ -124,10 +134,11 @@
 }
 
 @media (max-width:772px) {
-   
- .sidebar {
+
+    .sidebar {
         width: 35vw !important;
     }
+
     .main-content {
         margin-left: 35vw;
     }
@@ -188,17 +199,18 @@
 }
 
 @media (max-width: 768px) {
-  
-    #add-user-form{
-        width:50vw;
+
+    #add-user-form {
+        width: 50vw;
     }
 }
 
 @media (min-width: 768px) {
-    #add-user-form{
-        width:40vw;
+    #add-user-form {
+        width: 40vw;
     }
 }
+
 .nav-item:not(:first-child) {
     margin-left: 50px;
 }
@@ -207,9 +219,35 @@
     display: flex;
     flex-direction: row;
 }
+
 .show {
     display: block;
 }
+
 .hide {
-    display: none!important;
+    display: none !important;
+}
+
+.container_post {
+
+    width: 40vw;
+    margin: auto;
+}
+
+.container_post h2 {
+    font-family: "Playfair Display", serif !important;
+    font-weight:700;
+
+
+    
+}
+
+.container_post p {
+    font-family: "Playfair Display", serif !important;
+
+}
+
+.content_of_post img {
+    max-width: 100%;
+    height: auto !important;
 }

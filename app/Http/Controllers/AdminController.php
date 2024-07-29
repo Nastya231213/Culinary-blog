@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,14 +17,20 @@ class AdminController extends Controller
   
     public function showUsers(){
 
-        $users = User::paginate(5); 
+        $users = User::paginate(7); 
         return view('admin.users.list',compact('users'));
 
     }
     public function showCategories(){
 
-        $categories = Category::paginate(5); 
+        $categories = Category::paginate(7); 
         return view('admin.categories.list',compact('categories'));
+
+    }
+    public function showPosts(){
+
+        $posts = Post::paginate(7); 
+        return view('admin.posts.list',compact('posts'));
 
     }
     public function createUser(){
