@@ -3,6 +3,9 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -43,4 +46,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         }
     );
+    Route::prefix('posts')->name('posts.')->group(
+        function () {
+            Route::get('create', [AdminController::class, 'createPost'])->name('create');
+            Route::post('store', [PostController::class, 'storePost'])->name('store');
+
+
+        }
+    );
 });
+Route::post('upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image');

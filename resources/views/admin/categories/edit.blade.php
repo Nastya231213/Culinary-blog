@@ -34,12 +34,14 @@
                     <img id="photo_preview" src="{{asset('storage/category_photos/'.$category->image)}}" width="150" alt="Image preview">
                 </div>
             </div>
+
             @if($errors->has('profile_photo'))
             <div class="alert alert-danger error-message" role="alert">
                 {{$errors->first('profile_photo')}}
             </div>
             @endif
         </div>
+
         <div id="data-container" data-url="{{asset('storage/category_photos/'.$category->image)}}"></div>
 
         <div class="row mb-3">

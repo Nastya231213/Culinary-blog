@@ -36,6 +36,11 @@ class AdminController extends Controller
         $categories=Category::whereNull('parent_id')->get();
         return view('admin.categories.create',compact('categories'));
     }
+    public function createPost(){
+
+        $categories=Category::all();
+        return view('admin.posts.create',['categories'=>$categories]);
+    }
     public function editUser(User $user){
 
         return view('admin.users.edit',compact('user'));
