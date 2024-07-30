@@ -121,9 +121,9 @@ class UserController extends Controller
             $photoPath = $photo->store('profile_photos', 'public');
             $user->profile_photo = basename($photoPath);
         }
-        
+
         $user->save();
         return redirect()->route('admin.users')
-        ->with('successMessage', "User '{$user->name}' (ID: {$user->id}) has been updated successfully.");
+            ->with('successMessage', "User '{$user->name}' (ID: {$user->id}) has been updated successfully.");
     }
 }

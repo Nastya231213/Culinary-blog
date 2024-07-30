@@ -37,11 +37,11 @@
                         <td>{{ $post->category->name ?? 'No Category' }}</td>
                         <td>{{ $post->created_at->format('d M Y') }}</td>
                         <td>
-                            <a href="#" class="btn btn-success btn-sm">Show the complete post</a>
+                            <a href="{{route('admin.posts.show',$post->id)}}" class="btn btn-success btn-sm">Show the complete post</a>
 
-                            <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="{{route('admin.posts.edit',$post->id)}}" class="btn btn-primary btn-sm">Edit</a>
 
-                            <form action="#" method="POST" style="display:inline;">
+                            <form action="{{route('admin.posts.delete',$post->id)}}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this post?');">Delete</button>

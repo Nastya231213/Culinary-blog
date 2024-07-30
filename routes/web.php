@@ -51,6 +51,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('store', [PostController::class, 'storePost'])->name('store');
             Route::get('/', [AdminController::class, 'showPosts'])->name('index');
             Route::get('{id}', [PostController::class, 'showPost'])->name('show');
+            Route::delete('{post}', [PostController::class, 'deletePost'])->name('delete');
+            Route::get('{post}/edit', [AdminController::class, 'editPost'])->name('edit');
+            Route::put('{post}', [PostController::class, 'updatePost'])->name('update');
+            
+
         }
     );
 });
