@@ -36,7 +36,7 @@ body {
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-size: 18px;
-    width:100%;
+    width: 100%;
 
 }
 
@@ -176,4 +176,39 @@ footer .company-info {
 
 }
 
-/* Sidebar Styles */
+.profile-photo-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+
+}
+.profile_photo{
+    width: 40px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    border-radius: 50%; /* Makes the photo circular */
+    object-fit: cover; 
+    border: 2px solid #ddd; /    
+
+}
+
+.custom-container{
+    max-width:500px;
+    margin:0 auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding:15px;
+
+}
+.custom-container img{
+    border-radius: 50%;
+    width:150px;
+    border:2px solid #ddd;
+
+}
+
+
+.card-text{
+    font-size:17px;
+}

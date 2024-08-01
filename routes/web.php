@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -54,9 +55,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('{post}', [PostController::class, 'deletePost'])->name('delete');
             Route::get('{post}/edit', [AdminController::class, 'editPost'])->name('edit');
             Route::put('{post}', [PostController::class, 'updatePost'])->name('update');
-            
-
         }
     );
 });
 Route::post('upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image');
+Route::prefix('profile')->name('profile.')->group(function () {
+    Route::get('/', [ProfileController::class, 'index'])->name('show');
+});

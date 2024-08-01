@@ -38,5 +38,6 @@ class PostController extends Controller
         $post->content = $request->input('content'); 
         $post->save();
         return redirect()->route('admin.posts.show',$post->id)->with('success','Post updated successfully');
+        
     }
 }

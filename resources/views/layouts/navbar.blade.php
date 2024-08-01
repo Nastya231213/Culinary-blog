@@ -20,19 +20,35 @@
                     <a class="nav-link" href="#">BLOG</a>
                 </li>
                 @if(Auth::check())
-                <li class="nav-item d-flex flex-column align-items-center">
-                    <i class="bi bi-box-arrow-right mb-2"></i>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="nav-link btn btn-link p-0" style="border: none; background: none;">LOGOUT</button>
-                    </form>
-                </li>
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="profile-photo-wrapper">
+                            <img src="{{ auth()->user()->profile_photo_url ?asset('storage/profile_photos/$user->profile_photo'): asset('images/default_profile.jpg') }}" alt="Profile Photo" class="profile_photo me-2">
+                        </div>
 
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="{{route('profile.show')}}">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Settings <i class="bi bi-gear"></i></a></li>
+
+                        <li>
+                            <form method="POST" action="#">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Logout <i class="bi bi-box-arrow-right mb-1"></i>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+              
                 @else
                 <li class="nav-item d-flex flex-column align-items-center">
 
                     <i class="bi bi-box-arrow-in-left"></i>
-                    <a class="nav-link {{ request()->is('login')? 'active':''}}" href="{{route('login.form')}}">LOGIN</a>
+                    <a class="nav-link {{ request()->is('logsin')? 'active':''}}" href="{{route('login.form')}}">LOGIN</a>
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
 

@@ -18,8 +18,6 @@
         <div class="content_of_post">
             {!! $post->content !!}
         </div>
-
-
     </div>
 </div>
 
