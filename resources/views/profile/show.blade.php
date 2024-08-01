@@ -4,17 +4,19 @@
 @section('content')
 <div class="custom-container mx-auto ">
     <h3 class="text-center"> Your profile</h3>
-    <div class="d-flex align-items-center mt-4 flex-column">
-        <img src="{{auth()->user()->profile_photo? asset('storage/profile_photos/auth()->user()->profile_photo'):asset('images/default_profile.jpg')}}" alt="Profile Photo" class="profile-photo">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{route('profile.photo.update')}}" method="POST" enctype="multipart/form-data" id="form-profile">
             @csrf
             @method('PUT')
+            <div class="d-flex align-items-center mt-4 flex-column">
 
-            <input type="file" name="profile_photo" id="profile_photo" accept="image/*" style="display: none;" onchange="this.form.submit()">
-            <button type="button" class="btn btn-success mt-3" onclick="document.getElementById('profile_photo').click()">Change Photo</button>
+            <img  id="photo_preview" src="{{ auth()->user()->profile_photo ? asset('storage/profile_photos/' . auth()->user()->profile_photo) : asset('images/default_profile.jpg') }}" alt="Profile Photo" class="profile-photo">
+            <input type="file"  class="form-control w-50 float-start mt-2" name="profile_photo" id="photo" accept="image/*" >
+            <button type="submit" class="btn btn-success mt-3">Change Photo</button>
+            </div>
 
         </form>
-    </div>
+        <div id="data-container" data-url="{{ !empty($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}" ></div>
+
     <div class="card mb-4 mt-3">
         <div class="card-body text-left">
             <h5 class="card-title mb-2">Full Name:</h5>
@@ -61,4 +63,29 @@
 
 
 </div>
-\@endsection
+<div class=" modal fade" id="cropper-modal" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crop Image</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="crop-image" src="" alt="Crop Image" style="max-width: 100%;">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="cancel_button" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="crop-button">Crop & Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{asset('js/cropper.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+@endsection
