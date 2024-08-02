@@ -4,45 +4,60 @@
 @section('content')
 <div class="custom-container mx-auto ">
     <h3 class="text-center"> Your profile</h3>
-        <form action="{{route('profile.photo.update')}}" method="POST" enctype="multipart/form-data" id="form-profile">
-            @csrf
-            @method('PUT')
-            <div class="d-flex align-items-center mt-4 flex-column">
+    @include('message')
+    <form action="{{route('profile.photo.update')}}" method="POST" enctype="multipart/form-data" id="form-profile">
+        @csrf
+        @method('PUT')
+        <div class="d-flex align-items-center mt-4 flex-column">
 
-            <img  id="photo_preview" src="{{ auth()->user()->profile_photo ? asset('storage/profile_photos/' . auth()->user()->profile_photo) : asset('images/default_profile.jpg') }}" alt="Profile Photo" class="profile-photo">
-            <input type="file"  class="form-control w-50 float-start mt-2" name="profile_photo" id="photo" accept="image/*" >
+            <img id="photo_preview" src="{{ auth()->user()->profile_photo ? asset('storage/profile_photos/' . auth()->user()->profile_photo) : asset('images/default_profile.jpg') }}" alt="Profile Photo" class="profile-photo">
+            <input type="file" class="form-control w-50 float-start mt-2" name="profile_photo" id="photo" accept="image/*">
             <button type="submit" class="btn btn-success mt-3">Change Photo</button>
-            </div>
+        </div>
+        @if($errors->has('profile_photo'))
+        <div class="alert alert-danger error-message" role="alert">
+            {{$errors->first('profile_photo')}}
+        </div>
+        @endif
+    </form>
+    <div id="data-container" data-url="{{ !empty($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}"></div>
 
-        </form>
-        <div id="data-container" data-url="{{ !empty($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}" ></div>
-
-    <div class="card mb-4 mt-3">
+    <div class="card  mt-1">
         <div class="card-body text-left">
-            <h5 class="card-title mb-2">Full Name:</h5>
+            <h4 class="card-title mb-2">Full Name:</h4>
             <p class="card-text mb-2">{{auth()->user()->full_name}}</p>
-            <h5 class="card-title mb-2">Email:</h5>
+            <h4 class="card-title mb-2">Email:</h4>
             <p class="card-text mb-2">{{auth()->user()->email}}</p>
         </div>
     </div>
-    <div class="card mb-4 mt-3">
+    <div class="card  mt-1">
 
         <div class="card-body">
             <h4 class="card-title text-center">
                 Change Password
             </h4>
-            <form action="#" method="POST">
+            <form action="{{route('profile.password.update')}}" method="POST">
                 @csrf
                 @method('PUT')
 
                 <div class="form-group">
                     <label for="current_password">Current Password</label>
                     <input type="password" name="current_password" id="current_password" class="form-control" required>
+                    @if($errors->has('current_password'))
+                    <div class="alert alert-danger error-message" role="alert">
+                        {{$errors->first('current_password')}}
+                    </div>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <label for="new_password">New Password</label>
                     <input type="password" name="new_password" id="new_password" class="form-control" required>
+                    @if($errors->has('new_password'))
+                    <div class="alert alert-danger error-message" role="alert">
+                        {{$errors->first('new_password')}}
+                    </div>
+                    @endif
                 </div>
 
                 <div class="form-group">

@@ -203,15 +203,14 @@ footer .company-info {
 }
 .custom-container img{
     border-radius: 50%;
-    width:150px;
+    width:120px;
     border:2px solid #ddd;
 
 }
-
-
-.card-text{
-    font-size:17px;
+.custom-container h4{
+    font-size:20px;
 }
+
 
 .custom-file-upload {
     border: 1px solid #ccc;

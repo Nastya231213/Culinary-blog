@@ -61,5 +61,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::post('upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image');
 Route::prefix('profile')->name('profile.')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('show');
-    Route::put('/profile/photo',[ProfileController::class,'updatePhoto'])->name('photo.update');
+    Route::put('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('photo.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 });

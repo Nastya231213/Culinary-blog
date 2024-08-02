@@ -32,7 +32,6 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Settings <i class="bi bi-gear"></i></a></li>
 
                         <li>
                             <form method="POST" action="#">
