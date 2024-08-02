@@ -42,7 +42,7 @@
                         </li>
                     </ul>
                 </li>
-              
+
                 @else
                 <li class="nav-item d-flex flex-column align-items-center">
 
@@ -69,11 +69,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">All recipes</a>
                 </li>
-                @foreach($mealTypes as $mealType)
-                <li class="nav-item">
-                    <a class="nav-link" href="#">{{$mealType}}</a>
-                </li>
-                @endforeach
+               
             </ul>
         </div>
     </div>

@@ -8,11 +8,13 @@ use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\CheckAdmin;
+use App\Http\Middleware\CheckAuthenticate;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware(CheckAuthenticate::class);
 
 Route::get('login', [UserController::class, 'showLoginForm'])->name('login.form')->middleware(RedirectIfAuthenticated::class);
 Route::post('login', [UserController::class, 'login'])->name('login');
@@ -25,7 +27,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/')->with('successMessage', 'Your account is verified successfully.');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 //Admin panel
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(CheckAdmin::class)->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
     Route::prefix('users')->name('users.')->group(function () {
@@ -58,8 +60,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         }
     );
 });
-Route::post('upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image');
-Route::prefix('profile')->name('profile.')->group(function () {
+Route::post('upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image')->middleware(CheckAuthenticate::class);
+Route::prefix('profile')->name('profile.')->middleware(CheckAuthenticate::class)->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('show');
     Route::put('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('photo.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
