@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable=['title','content','category_id'];
+    protected $fillable=['title','content','category_id','views','main_photo_url'];
 
     public function category(){
         return $this->belongsTo(Category::class);

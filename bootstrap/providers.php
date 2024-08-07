@@ -2,5 +2,5 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    App\Providers\MealTypesServiceProvider::class,
+    App\Providers\CategoryServiceProvider::class,
 ];

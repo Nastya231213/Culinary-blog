@@ -234,7 +234,7 @@
     margin: auto;
 }
 
-.container_post h2 {
+.container_post h1,.content_of_post h1 {
     font-family: "Playfair Display", serif !important;
     font-weight:700;
 
@@ -251,3 +251,4 @@
     max-width: 100%;
     height: auto !important;
 }
+

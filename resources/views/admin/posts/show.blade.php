@@ -8,7 +8,7 @@
     </a>
 
     <div class="container_post">
-        <h2>{{$post->title}}</h2>
+        <h1>{{$post->title}}</h1>
         @php
         $formattedDate=\Carbon\Carbon::parse($post->created_at)->format('F d, Y');
 

@@ -117,6 +117,7 @@ class UserController extends Controller
             }
         }
         if ($request->hasFile('profile_photo')) {
+            
             $photo = $request->file('profile_photo');
             $photoPath = $photo->store('profile_photos', 'public');
             $user->profile_photo = basename($photoPath);

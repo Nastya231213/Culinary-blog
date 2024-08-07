@@ -3,9 +3,12 @@
 @section('title','Login')
 @section('content')
 <div class="container">
+    <div>
+    @include('message')
+
+    </div>
     <div class="row w-75  mx-auto " id="authenticationForm">
         <div class="col-sm-6 text-black">
-            @include('message')
 
             <div class="d-flex align-items-center h-custom-2  ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
                 <form method="POST" action="{{route('login') }}" style="width: 23rem;">

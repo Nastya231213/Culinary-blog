@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     defineImageType();
 
     cancelButton.addEventListener('click', function () {
-  
+
         imageInput.value = '';
         preview.src = url;
         if (url === '') {
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
             preview.style.display = 'block';
             cropperModal.hide();
         }, 'image/jpeg');
-    });e
+    }); e
     document.getElementById('cropper-modal').addEventListener('show.bs.modal', function () {
         if (cropper) {
             var canvas = cropper.getCroppedCanvas({
@@ -97,9 +97,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 cropHeight = 400;
                 cropWidth = 400;
                 break;
+            case 'post':
+                cropHeight = 400;
+                cropWidth = 300;
 
         }
     }
-
-
 });

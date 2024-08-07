@@ -17,6 +17,11 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->category_id = $request->input('category_id');
         $post->content = $request->input('content');
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoPath = $photo->store('post_photos', 'public');
+            $post->main_photo_url = basename($photoPath);
+        }
         $post->save();
         return redirect()->route('admin.posts.create')->with('success', 'Post created successfully!');
     }
@@ -34,10 +39,15 @@ class PostController extends Controller
     public function updatePost(PostRequest $request, Post $post)
     {
         $post->title = $request->input('title');
-        $post->category_id = $request->input('category_id'); 
-        $post->content = $request->input('content'); 
+        $post->category_id = $request->input('category_id');
+        $post->content = $request->input('content');
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoPath = $photo->store('post_photos', 'public');
+            $post->main_photo_url = basename($photoPath);
+        }
         $post->save();
-        return redirect()->route('admin.posts.show',$post->id)->with('success','Post updated successfully');
-        
+        return redirect()->route('admin.posts.show', $post->id)->with('success', 'Post updated successfully');
     }
 }

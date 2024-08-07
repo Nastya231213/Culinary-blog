@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -65,4 +64,5 @@ Route::prefix('profile')->name('profile.')->middleware(CheckAuthenticate::class)
     Route::get('/', [ProfileController::class, 'index'])->name('show');
     Route::put('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('photo.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
+    
 });
