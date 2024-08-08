@@ -11,12 +11,29 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function index(Request $request)
+    {
+        $query = Post::query();
+        if ($search = $request->query('search')) {
+            $query->where('title', 'like', "%{$search}%")->orWhere('content', 'like', "%{$search}%");
+            ;
+        }
+        $popularRecipes = Post::orderBy('views', 'desc')->take(3)->get();
+        $popularCategories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(3)->get();
 
-    public function show($id){
-                $popularRecipes=Post::orderBy('views','desc')->take(3)->get();
-        $popularCategories=Category::withCount('posts')->orderBy('posts_count','desc')->take(3)->get();
-        $post=Post::findOrFail($id);
-        return view('show-post',['post'=>$post,'popularRecipes'=>$popularRecipes,'popularCategories'=>$popularCategories]);
+        $posts = $query->paginate(5);
+
+
+        return view('posts.index', ['popularRecipes' => $popularRecipes, 'popularCategories' => $popularCategories, 'posts' => $posts]);
+    }
+
+    public function show($id)
+    {
+        $popularRecipes = Post::orderBy('views', 'desc')->take(3)->get();
+        $popularCategories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(3)->get();
+        $post = Post::findOrFail($id);
+
+        return view('show-post', ['post' => $post, 'popularRecipes' => $popularRecipes, 'popularCategories' => $popularCategories]);
     }
     public function storePost(PostRequest $request)
     {

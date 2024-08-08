@@ -84,7 +84,7 @@
             </div>
             @endif
         </div>
-        <div id="data-container" data-url="" ></div>
+        <div id="data-container" data-url=""></div>
 
         <div class="row mb-3">
             <div class="mx-auto col-sm-6">

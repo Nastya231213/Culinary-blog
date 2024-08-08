@@ -105,8 +105,8 @@
                     </li>
                 </ul>
 
-                <form class="d-flex w-100  mx-auto justify-content-center justify-content-lg-end" role="search" id="search-form" action="#" method="GET">
-                    <input class="form-control ms-1" type="search" placeholder="Search" id="search" aria-label="Search" name="query">
+                <form action="{{route('posts.index')}}" class="d-flex w-100  mx-auto justify-content-center justify-content-lg-end" role="sh" id="search-form"method="GET">
+                    <input class="form-control ms-1" value="{{request()->query('search')}}" type="search" placeholder="Search" id="search" aria-label="Search" name="search">
                     <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
                 </form>
 
