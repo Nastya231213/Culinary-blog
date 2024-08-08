@@ -59,6 +59,7 @@ Route::prefix('admin')->name('admin.')->middleware(CheckAdmin::class)->group(fun
         }
     );
 });
+
 Route::post('upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image')->middleware(CheckAuthenticate::class);
 Route::prefix('profile')->name('profile.')->middleware(CheckAuthenticate::class)->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('show');
@@ -66,3 +67,5 @@ Route::prefix('profile')->name('profile.')->middleware(CheckAuthenticate::class)
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
     
 });
+
+Route::get('/posts/{id}',[PostController::class,'show'])->name('posts.show');

@@ -16,12 +16,12 @@
     <div class="content_of_post">
         {!! Str::limit($post->content, 500) !!}
     </div>
-    <a class="continue-reading-link" href="#">Continue Reading >></a>
+    <a class="continue-reading-link" href="{{route('posts.show',$post->id)}}">Continue Reading >></a>
 </div>
 
 @endforeach
 <div class="pagination ">
     <a href="{{ $posts->previousPageUrl() }}" class="{{ $posts->onFirstPage() ? 'disabled' : '' }} pagination-btn "><- Previous Page </a>
-    <a href="{{ $posts->nextPageUrl() }}" class="{{ !$posts->hasMorePages() ? 'disabled' : '' }}  pagination-btn ">Next Page -></a>
+            <a href="{{ $posts->nextPageUrl() }}" class="{{ !$posts->hasMorePages() ? 'disabled' : '' }}  pagination-btn ">Next Page -></a>
 </div>
-    @endsection
+@endsection

@@ -422,7 +422,7 @@ hr {
     max-width: 600px;
 
     max-width: 100%;
-    display:flex;
+    display: flex;
     justify-content: space-between;
 }
 
@@ -439,4 +439,94 @@ hr {
     color: #ddd;
     cursor: not-allowed;
     pointer-events: none;
+}
+
+.container-comments {
+    padding: 20px;
+
+    max-width: 500px;
+    box-shadow: 0 0 5px #000;
+    margin-bottom: 5vh;
+}
+
+.comment-box {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.comment-box>img,
+.parents>img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.comment-input {
+    width: 100%;
+}
+
+.comment-input>input {
+    border: none;
+    padding: 10px;
+    padding-left: 0;
+    outline: none;
+    border-bottom: 2px solid rgb(125, 125, 134);
+    margin-bottom: 10px;
+    width: 95%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #808080
+}
+
+.buttons button {
+    padding: 5px 10px;
+    background: lightgrey;
+    color: #808080;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.parents {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.parents h1 {
+    font-size: 0.9em;
+}
+
+.parents p {
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.engagements {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.engagements>i {
+    color: #808080;
+}
+
+.engagements span:nth-child(2),.engagements span:nth-child(4){
+    margin-right:10px;
+}
+
+.reply-button{
+    background:none;
+    border:none;
+    color:#007bff;
 }
