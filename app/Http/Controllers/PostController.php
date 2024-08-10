@@ -15,8 +15,7 @@ class PostController extends Controller
     {
         $query = Post::query();
         if ($search = $request->query('search')) {
-            $query->where('title', 'like', "%{$search}%")->orWhere('content', 'like', "%{$search}%");
-            ;
+            $query->where('title', 'like', "%{$search}%")->orWhere('content', 'like', "%{$search}%");;
         }
         $popularRecipes = Post::orderBy('views', 'desc')->take(3)->get();
         $popularCategories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(3)->get();
@@ -33,7 +32,7 @@ class PostController extends Controller
         $popularCategories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(3)->get();
         $post = Post::findOrFail($id);
 
-        return view('show-post', ['post' => $post, 'popularRecipes' => $popularRecipes, 'popularCategories' => $popularCategories]);
+        return view('posts.show', ['post' => $post, 'popularRecipes' => $popularRecipes, 'popularCategories' => $popularCategories]);
     }
     public function storePost(PostRequest $request)
     {

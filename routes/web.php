@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\PostController;
@@ -69,4 +70,10 @@ Route::prefix('profile')->name('profile.')->middleware(CheckAuthenticate::class)
 });
 
 Route::get('/posts/{id}',[PostController::class,'show'])->name('posts.show');
+
 Route::get('/posts',[PostController::class,'index'])->name('posts.index');
+
+Route::prefix('comments')->name('comments.')->middleware(CheckAuthenticate::class)->group(function () {
+    Route::post('/submit',[CommentController::class,'store'])->name('submit');
+
+});
