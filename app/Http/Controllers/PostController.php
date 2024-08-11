@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -31,8 +32,9 @@ class PostController extends Controller
         $popularRecipes = Post::orderBy('views', 'desc')->take(3)->get();
         $popularCategories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(3)->get();
         $post = Post::findOrFail($id);
-
-        return view('posts.show', ['post' => $post, 'popularRecipes' => $popularRecipes, 'popularCategories' => $popularCategories]);
+        $comments=Comment::with('author')->where('post_id',$id)->get();
+        return view('posts.show', ['post' => $post, 'popularRecipes' => $popularRecipes, 
+        'popularCategories' => $popularCategories,'comments'=>$comments]);
     }
     public function storePost(PostRequest $request)
     {
@@ -73,4 +75,5 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('admin.posts.show', $post->id)->with('success', 'Post updated successfully');
     }
+
 }

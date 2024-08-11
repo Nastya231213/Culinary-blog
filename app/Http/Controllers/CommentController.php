@@ -18,13 +18,22 @@ class CommentController extends Controller
 
         try {
             $comment = new Comment();
-    
+
             $comment->content = $request->input('comment');
             $comment->post_id = $request->input('post_id');
             $comment->author_id = Auth::id();
             $comment->save();
-
-            return response()->json(['success' => true], 200);
+            $comment->load('author');
+            return response()->json([
+                'success' => true,
+                'comment' => [
+                    'id' => $comment->id,
+                    'author_profile_photo' =>asset('storage/profile_photos/'. $comment->author->profile_photo) ?? asset('images/default_profile.jpg'),
+                    'author_full_name' => $comment->author->full_name,
+                    'content' => $comment->content,
+                    'created_at' => $comment->created_at->format('F d, Y h:i A'), 
+                    ]
+            ], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Unable to save comment'], 500);
         }
