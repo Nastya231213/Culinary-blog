@@ -31,7 +31,6 @@
         </div>
     </div>
     <div class="card  mt-1">
-
         <div class="card-body">
             <h4 class="card-title text-center">
                 Change Password

@@ -32,7 +32,8 @@ class PostController extends Controller
         $popularRecipes = Post::orderBy('views', 'desc')->take(3)->get();
         $popularCategories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(3)->get();
         $post = Post::findOrFail($id);
-        $comments=Comment::with('author')->where('post_id',$id)->get();
+        $comments=Comment::with('author')->where('post_id',$id)->where('parent_id', null)->get();
+
         return view('posts.show', ['post' => $post, 'popularRecipes' => $popularRecipes, 
         'popularCategories' => $popularCategories,'comments'=>$comments]);
     }

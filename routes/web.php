@@ -74,4 +74,5 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 Route::prefix('comments')->name('comments.')->middleware(CheckAuthenticate::class)->group(function () {
     Route::post('/submit', [CommentController::class, 'store'])->name('submit');
+    Route::post('/reply', [CommentController::class, 'reply'])->name('reply');
 });
