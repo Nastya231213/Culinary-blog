@@ -53,7 +53,7 @@ class CommentController extends Controller
             $reply = new Comment([
                 'content' => $validated['comment'],
                 'author_id' => $user->id,
-                'post_id'=>$validated['post_id'],
+                'post_id' => $validated['post_id'],
                 'parent_id' => $validated['parent_id'],
             ]);
             $reply->save();

@@ -60,19 +60,21 @@ Route::prefix('admin')->name('admin.')->middleware(CheckAdmin::class)->group(fun
         }
     );
 });
-
-Route::post('upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image')->middleware(CheckAuthenticate::class);
+Route::prefix('comments')->name('comments.')->middleware(CheckAuthenticate::class)->group(function () {
+    Route::post('/submit', [CommentController::class, 'store'])->name('submit');
+    Route::post('/reply', [CommentController::class, 'reply'])->name('reply');
+    Route::post('/reaction', [PostController::class, 'handleReaction'])->name('reaction');
+});
 Route::prefix('profile')->name('profile.')->middleware(CheckAuthenticate::class)->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('show');
     Route::put('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('photo.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 });
+Route::prefix('posts')->name('posts.')->middleware(CheckAuthenticate::class)->group(function () {
 
-Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+    Route::get('/{id}', [PostController::class, 'show'])->name('show');
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-
-Route::prefix('comments')->name('comments.')->middleware(CheckAuthenticate::class)->group(function () {
-    Route::post('/submit', [CommentController::class, 'store'])->name('submit');
-    Route::post('/reply', [CommentController::class, 'reply'])->name('reply');
+    Route::get('', [PostController::class, 'index'])->name('index');
 });
+
+Route::post('upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image')->middleware(CheckAuthenticate::class);

@@ -23,4 +23,17 @@ class Comment extends Model
     public function parent(){
         return $this->belogsTo(Comment::class,'parent_id');
     }
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'comment_id', 'id')->where('type', 'like');
+    }
+    
+    public function dislikes()
+    {
+        return $this->hasMany(Like::class, 'comment_id', 'id')->where('type', 'dislike');
+    }
+    public function reactions()
+    {
+        return $this->hasMany(Like::class, 'comment_id', 'id');
+    }
 }

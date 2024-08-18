@@ -444,15 +444,16 @@ hr {
 .container-comments {
     padding: 20px;
 
-    max-width: 500px;
-    box-shadow: 0 0 5px #000;
+    max-width: 600px;
     margin-bottom: 5vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.11);
+
 }
 
 .comment-box {
     display: flex;
-    justify-content: space-around;
-    padding: 10px;
+    flex-direction: row;
+    padding: 5px;
 }
 
 .comment-box>img,
@@ -467,7 +468,7 @@ hr {
 }
 
 .comment-input {
-    width: 100%;
+    width: 90%;
 }
 
 .comment-input>input {
@@ -516,10 +517,13 @@ hr {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    font-size:15px;
+
 }
 
 .engagements>i {
-    color: #808080;
+    color: #181818;
+    margin-right:5px;
 }
 
 .engagements span:nth-child(2),.engagements span:nth-child(4){
@@ -541,4 +545,7 @@ hr {
 .replies-toggler{
     margin-top:10px;
     color:#007bff;
+}
+.like-button,.dislike-button{
+    cursor: pointer;
 }
