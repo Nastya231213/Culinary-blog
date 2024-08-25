@@ -549,3 +549,25 @@ hr {
 .like-button,.dislike-button{
     cursor: pointer;
 }
+.nav-link, 
+.dropdown-item {
+    transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease;
+}
+
+.secondary-navbar .nav-link:focus, 
+.dropdown-item:focus, 
+.dropdown-item:hover,.secondary-navbar .nav-link:hover{
+    background-color: rgb(157, 157, 157) !important;
+    color: #fff!important;
+    box-shadow: none !important;
+    outline: none !important;
+    border-radius: 5px !important; 
+}
+
+.show-subcategories-btn{
+    font-size: 0.7rem!important;
+    text-wrap:wrap
+}
+.container_categories.card{
+   min-height:300px;
+}

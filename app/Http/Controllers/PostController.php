@@ -28,6 +28,23 @@ class PostController extends Controller
 
         return view('posts.index', ['popularRecipes' => $popularRecipes, 'popularCategories' => $popularCategories, 'posts' => $posts]);
     }
+    public function postsByCategory($categoryId)
+    {
+        $popularRecipes = Post::orderBy('views', 'desc')->take(3)->get();
+        $popularCategories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(3)->get();
+        $category = Category::findOrFail($categoryId);
+        if ($category->parent_id) {
+            $posts = $category->posts()->paginate(5);
+        } else {
+            $subcategoriesIds = $category->subcategories()->pluck('id');
+            $posts = Post::whereIn('category_id', $subcategoriesIds)->paginate(5);
+            $popularRecipes = Post::orderBy('views', 'desc')->take(3)->get();
+            $popularCategories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(3)->get();
+        }
+
+        return view('posts.index', ['popularRecipes' => $popularRecipes, 'popularCategories' => $popularCategories, 'posts' => $posts]);
+    }
+
     public function handleReaction(Request $request)
     {
         $request->validate([
@@ -43,13 +60,12 @@ class PostController extends Controller
             return response()->json(['success' => false, 'message' => 'User not authenticated.'], 401);
         }
 
-        $type=$request->input('type');
+        $type = $request->input('type');
         $reaction = $comment->reactions()->firstOrNew(['user_id' => $user->id]);
-        if ($reaction->id && $reaction->type==$type) {
+        if ($reaction->id && $reaction->type == $type) {
             $reaction->delete();
-
         } else {
-            if($reaction->id){
+            if ($reaction->id) {
                 $reaction->delete();
             }
             $reaction = new Like();
@@ -58,15 +74,17 @@ class PostController extends Controller
             $reaction->user_id = $user->id;
             $reaction->save();
         }
-        $likesCount=$comment->likes()->count();
-        $dislikesCount=$comment->dislikes()->count();
+        $likesCount = $comment->likes()->count();
+        $dislikesCount = $comment->dislikes()->count();
         $userReacted = $comment->reactions()->where('user_id', $user->id)->where('type', $type)->exists();
 
 
-        return response()->json(['success' => true,
-        'likes_count' => $likesCount,
-        'dislikes_count' => $dislikesCount,
-        'user_reacted' => $userReacted]);
+        return response()->json([
+            'success' => true,
+            'likes_count' => $likesCount,
+            'dislikes_count' => $dislikesCount,
+            'user_reacted' => $userReacted
+        ]);
     }
 
 
@@ -76,15 +94,16 @@ class PostController extends Controller
         $popularRecipes = Post::orderBy('views', 'desc')->take(3)->get();
         $popularCategories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(3)->get();
         $post = Post::withCount('comments')->findOrFail($id);
-        $user=Auth::user();
-        $comments = Comment::with('author')
-            ->withCount(['likes', 'dislikes'])
+        $user = Auth::user();
+
+        $comments = Comment::with(['author', 'replies' => function ($query) {
+            $query->with('author')->withCount(['likes', 'dislikes', 'replies']);
+        }])->withCount(['likes', 'dislikes'])
             ->where('post_id', $id)
             ->where('parent_id', null)->get();
-        foreach($comments as $comment){
-            $comment->user_like=$comment->likes()->where('user_id',$user->id)->exists();
-            $comment->user_dislike=$comment->dislikes()->where('user_id',$user->id)->exists();
-
+        foreach ($comments as $comment) {
+            $comment->user_like = $comment->likes()->where('user_id', $user->id)->exists();
+            $comment->user_dislike = $comment->dislikes()->where('user_id', $user->id)->exists();
         }
 
         return view('posts.show', [

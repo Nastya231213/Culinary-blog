@@ -38,5 +38,5 @@
 
      </div>
      <div class="mt-2">
-         <a href="#" id="more-favourites-link">More categories >></a>
+         <a href="{{route('categories.index')}}" id="more-favourites-link">More categories >></a>
      </div>

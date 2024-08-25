@@ -73,8 +73,11 @@ Route::prefix('profile')->name('profile.')->middleware(CheckAuthenticate::class)
 Route::prefix('posts')->name('posts.')->middleware(CheckAuthenticate::class)->group(function () {
 
     Route::get('/{id}', [PostController::class, 'show'])->name('show');
-
     Route::get('', [PostController::class, 'index'])->name('index');
+    Route::get('/category/{category_id}', [PostController::class, 'postsByCategory'])->name('category');
 });
-
+Route::prefix('categories')->name('categories.')->middleware(CheckAuthenticate::class)->group(function () {
+    Route::get('', [CategoryController::class, 'index'])->name('index');
+    Route::get('subcategories/{parent_id}', [CategoryController::class, 'subcategories'])->name('subcategories');
+});
 Route::post('upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image')->middleware(CheckAuthenticate::class);

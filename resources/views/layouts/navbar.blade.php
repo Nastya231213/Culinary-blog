@@ -73,23 +73,25 @@
 
                     @foreach($categoriesWithoutSubcategories->take(5) as $category)
                     <li class="nav-item">
-                        <a class="nav-link" href="#">{{ $category->name }}</a>
+                        <a class="nav-link" href="{{route('posts.category',$category->id)}}">{{ $category->name }}</a>
                     </li>
                     @endforeach
 
-                    {{-- Display dropdown if there are more than 5 categories with subcategories --}}
                     @if($categoriesDisplayedInDropdown->count() > 0)
                     <li class="nav-item dropdown d-none d-lg-block">
                         <a class="nav-link d-flex text-nowrap" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-chevron-right me-2" id="toggle-icon-categories"></i> More Categories
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="subcategoriesDropdown">
+                            <li class="dropdown-item">
+                                <a class="nav-link" href="{{route('categories.index')}}">All categories</a>
+                            </li>
                             @foreach($categoriesDisplayedInDropdown as $category)
                             <li class="dropdown-item dropdown-submenu">
-                                <a class="dropdown-item" id="subcategoriesDropdown" href="#">{{ $category->name }}<i class="bi bi-chevron-right"></i></a>
+                                <a class="nav-link" href="{{route('posts.category',$category->id)}}">{{ $category->name }}<i class="bi bi-chevron-right"></i></a>
                                 <ul class="dropdown-menu">
                                     @foreach($category->subcategories as $subcategory)
-                                    <li><a class="dropdown-item" href="#">{{ $subcategory->name }}</a></li>
+                                    <li><a class="nav-link" href="{{route('posts.category',$subcategory->id)}}">{{ $subcategory->name }}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -105,7 +107,7 @@
                     </li>
                 </ul>
 
-                <form action="{{route('posts.index')}}" class="d-flex w-100  mx-auto justify-content-center justify-content-lg-end" role="sh" id="search-form"method="GET">
+                <form action="{{route('posts.index')}}" class="d-flex w-100  mx-auto justify-content-center justify-content-lg-end" role="sh" id="search-form" method="GET">
                     <input class="form-control ms-1" value="{{request()->query('search')}}" type="search" placeholder="Search" id="search" aria-label="Search" name="search">
                     <button class="btn btn-outline-success" type="submit"> <i class="bi bi-search"></i></button>
                 </form>

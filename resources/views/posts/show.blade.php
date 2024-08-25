@@ -8,7 +8,7 @@
     @php
     $formattedDate = \Carbon\Carbon::parse($post->created_at)->format('F d, Y');
     @endphp
-    <div class="info">{{ $formattedDate }} - <span id="comment-count">0</span> comments</div>
+    <div class="info">{{ $formattedDate }} - {{$post->comments_count}} comments</div>
 
     <div class="content_of_post">
         {!! $post->content !!}
@@ -49,6 +49,7 @@
                     <span class="dislikes-count">{{ $comment->dislikes_count }}</span>
                     <button class="reply-button" data-comment-id="{{ $comment->id }}">Reply</button>
 
+
                 </div>
 
                 <span class="date">{{ $comment->created_at->format('F d, Y h:i A') }}</span>
@@ -79,15 +80,15 @@
                         </h1>
                         <p>{{$reply->content}}</p>
                         <div class="engagements">
-                            <i class="bi bi-hand-thumbs-up ml-2"></i><span>{{$comment->likes_count}}</span>
-                            <i class="bi bi-hand-thumbs-down"></i><span>{{$comment->dislikes_count}}</span>
+                            <i class="bi bi-hand-thumbs-up ml-2"></i><span>{{ $reply->likes_count }}</span>
+                            <i class="bi bi-hand-thumbs-down"></i><span>{{ $reply->dislikes_count }}</span>
                             <button class="reply-button" data-comment-id="{{ $comment->id }}">Reply</button>
+
                         </div>
                         <span class="date">{{ $reply->created_at->format('F d, Y h:i A') }}</span>
                     </div>
                 </div>
                 @endforeach
-
             </div>
         </div>
 

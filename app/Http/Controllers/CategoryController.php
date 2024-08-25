@@ -5,10 +5,31 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function index()
+    {
+        $data = $this->getPopularRecipesAndCategories();
+        $data['allCategories'] = Category::where('parent_id', null)->paginate(5);
+        return view('categories.index', $data);
+    }
+    
+    public function subcategories($category_id)
+    {
+        $data = $this->getPopularRecipesAndCategories();
+        $data['allCategories'] = Category::where('parent_id', $category_id)->paginate(5); 
+        return view('categories.index', $data);
+    }
+    private function getPopularRecipesAndCategories()
+    {
+        return [
+            'popularRecipes' => Post::orderBy('views', 'desc')->take(3)->get(),
+            'popularCategories' => Category::withCount('posts')->orderBy('posts_count', 'desc')->take(3)->get(),
+        ];
+    }
     public function storeCategory(StoreCategoryRequest $request)
     {
         $photoPath = null;
@@ -28,12 +49,9 @@ class CategoryController extends Controller
     }
     public function deleteCategory(Category $category)
     {
-
         $category->delete();
         return redirect()->route('admin.categories.index')->with('successMessage', 'Category deleted successfully!');
     }
-
-
     public function updateCategory(StoreCategoryRequest $request, Category $category)
     {
         $validatedData = $request->validate(
