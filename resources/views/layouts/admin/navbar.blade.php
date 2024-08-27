@@ -8,7 +8,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-speedometer2"></i>
-                    <a class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                    <a class="nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-person-fill"></i>
@@ -16,7 +16,7 @@
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-tags-fill"></i>
-                    <a class="nav-link {{ request()->is('admin/categories') ? 'active' : '' }}" href="#">Categories</a>
+                    <a class="nav-link {{ request()->is('admin/categories') ? 'active' : '' }}" href="{{route('admin.categories.index')}}">Categories</a>
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-file-earmark-text"></i>

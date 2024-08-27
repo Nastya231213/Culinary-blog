@@ -4,6 +4,8 @@
 
 <div class="main-content" id="mainContent">
     <div class="container">
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i>Go Back</a>
+
         <h4 class="my-4 text-center">Categories Management Dashboard</h4>
         <div class="mb-3 text-end">
             <a href="{{route('admin.categories.create')}}" class="btn btn-primary">
@@ -36,19 +38,19 @@
                         <td>{{$category->name}}</td>
                         <td>
                             @if($category->image)
-                                <img id="photo_preview" src="{{asset('storage/category_photos/'.$category->image)}}" width="120" alt="Image preview">
+                            <img id="photo_preview" src="{{asset('storage/category_photos/'.$category->image)}}" width="120" alt="Image preview">
                             @else
-                                No image
+                            No image
                             @endif
                         </td>
                         <td>
                             @if($category->parent_id)
-                                @php
-                                    $parentCategory = $categories->find($category->parent_id);
-                                @endphp
-                                {{ $parentCategory ? $parentCategory->name : 'Unknown' }}
+                            @php
+                            $parentCategory = $categories->find($category->parent_id);
+                            @endphp
+                            {{ $parentCategory ? $parentCategory->name : 'Unknown' }}
                             @else
-                                Main Category
+                            Main Category
                             @endif
                         </td>
                         <td>{{ $category->created_at->format('d M Y') }}</td>
@@ -68,11 +70,9 @@
                 </tbody>
             </table>
             @endif
-
-            <div class="mt-4 p-4">
-                {{ $categories->links('pagination::bootstrap-5') }}
-            </div>
+         
         </div>
+
     </div>
 </div>
 @endsection

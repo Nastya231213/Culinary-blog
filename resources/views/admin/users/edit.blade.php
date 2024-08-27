@@ -4,7 +4,7 @@
 
 
 <div class="main-content" id="mainContent">
-    <a href="{{route('admin.users.update',$user->id)}}" class="btn btn-primary">
+    <a href="{{route('admin.users.index')}}" class="btn btn-primary">
         <i class="bi bi-arrow-left"></i> All Users
     </a>
     <form action="{{route('admin.users.update',$user->id)}}" id="add-user-form" method="POST" enctype="multipart/form-data" class="mx-auto border rounded p-4">
@@ -41,7 +41,7 @@
         <div class="row mb-3">
             <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-md-12 col-lg-10">
-                <input type="password" class="form-control" id="current_password" name="password" >
+                <input type="password" class="form-control" id="current_password" name="password">
             </div>
             @if($errors->has('password'))
             <div class="alert alert-danger error-message" role="alert">
@@ -52,7 +52,7 @@
         <div class="row mb-3">
             <label for="password" class="col-sm-2 col-form-label">New password</label>
             <div class="col-md-12 col-lg-10">
-                <input type="password" class="form-control" id="password" name="new_password" >
+                <input type="password" class="form-control" id="password" name="new_password">
             </div>
 
         </div>
@@ -71,9 +71,9 @@
                 <div class="mt-2">
 
                     <img id="photo_preview" class="{{$user->profile_photo!=null?'show':'hide' }}"
-                     src="{{ !empty($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}" style="width: 150px;" alt="Image preview">
+                        src="{{ !empty($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}" style="width: 150px;" alt="Image preview">
                 </div>
-                <div id="data-container" data-url="{{ !empty($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}" ></div>
+                <div id="data-container" data-url="{{ !empty($user->profile_photo) ? asset('storage/profile_photos/' . $user->profile_photo) : '' }}"></div>
 
             </div>
             @if($errors->has('profile_photo'))

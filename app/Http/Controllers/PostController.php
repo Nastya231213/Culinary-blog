@@ -105,6 +105,12 @@ class PostController extends Controller
             $comment->user_like = $comment->likes()->where('user_id', $user->id)->exists();
             $comment->user_dislike = $comment->dislikes()->where('user_id', $user->id)->exists();
         }
+        $sessionKey='post_'.$post->id;
+        if(!session()->has($sessionKey)){
+            $post->increment('views');
+            session()->put($sessionKey, 1);
+
+        }
 
         return view('posts.show', [
             'post' => $post,
@@ -129,7 +135,7 @@ class PostController extends Controller
     }
     public function showPost($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::withCount('comments')->findOrFail($id);
         return view('admin.posts.show', compact('post'));
     }
     public function deletePost(Post $post)

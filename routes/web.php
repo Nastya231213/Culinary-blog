@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -14,7 +15,10 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware(CheckAuthenticate::class);
+Route::get('/', [PageController::class, 'index'])->name('home')->middleware(CheckAuthenticate::class);
+Route::post('upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image')->middleware(CheckAuthenticate::class);
+Route::get('about', [PageController::class, 'about'])->name('about');
+Route::get('contact', [PageController::class, 'contact'])->name('contact');
 
 Route::get('login', [UserController::class, 'showLoginForm'])->name('login.form')->middleware(RedirectIfAuthenticated::class);
 Route::post('login', [UserController::class, 'login'])->name('login');
@@ -71,7 +75,6 @@ Route::prefix('profile')->name('profile.')->middleware(CheckAuthenticate::class)
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('password.update');
 });
 Route::prefix('posts')->name('posts.')->middleware(CheckAuthenticate::class)->group(function () {
-
     Route::get('/{id}', [PostController::class, 'show'])->name('show');
     Route::get('', [PostController::class, 'index'])->name('index');
     Route::get('/category/{category_id}', [PostController::class, 'postsByCategory'])->name('category');
@@ -80,4 +83,3 @@ Route::prefix('categories')->name('categories.')->middleware(CheckAuthenticate::
     Route::get('', [CategoryController::class, 'index'])->name('index');
     Route::get('subcategories/{parent_id}', [CategoryController::class, 'subcategories'])->name('subcategories');
 });
-Route::post('upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image')->middleware(CheckAuthenticate::class);

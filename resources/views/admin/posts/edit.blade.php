@@ -3,7 +3,9 @@
 @section('content')
 
 <div class="main-content" id="mainContent">
-
+    <a href="{{route('admin.posts.index')}}" class="btn btn-primary">
+        <i class="bi bi-arrow-left"></i> All Posts
+    </a>
     <form action="{{ route('admin.posts.update', $post->id) }}" id="add-user-form" method="POST" class="mx-auto border rounded p-4 content_of_post" enctype="multipart/form-data">
         @method('PUT')
         @csrf
@@ -35,7 +37,7 @@
             <div class=" col-sm-10">
                 <input type="file" class="form-control mt-3" id="photo" name="photo" data-image-type="category" accept="image/*">
                 <div class="mt-2">
-                    <img id="photo_preview" src="{{asset('storage/post_photos/'.$post->main_photo_url)}}" width="150" alt="Image preview" >
+                    <img id="photo_preview" src="{{asset('storage/post_photos/'.$post->main_photo_url)}}" width="150" alt="Image preview">
                 </div>
             </div>
             <div id="data-container" data-url=""></div>

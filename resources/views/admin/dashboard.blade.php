@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Users <i class="bi bi-people-fill"></i></h5>
-                    <p class="card-text">Total users: </p>
+                    <p class="card-text">Total users: {{$userCount}}</p>
                     <a href="{{route('admin.users.index')}}" class="btn btn-primary">View All Users</a>
                 </div>
             </div>
@@ -17,25 +17,17 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Recipes <i class="bi bi-card-list"></i></h5>
-                    <p class="card-text">Total recipes: 250</p>
-                    <a href="#" class="btn btn-primary">View All Recipes</a>
+                    <p class="card-text">Total recipes: {{$postCount}}</p>
+                    <a href="{{route('admin.posts.index')}}" class="btn btn-primary">View All Recipes</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Comments <i class="bi bi-chat-dots-fill"></i></h5>
-                    <p class="card-text">Total comments: 500</p>
-                    <a href="#" class="btn btn-primary">View All Comments</a>
-                </div>
-            </div>
-        </div>
+     
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Categories <i class="bi bi-tags-fill"></i></h5>
-                    <p class="card-text">Total categories: 500</p>
+                    <p class="card-text">Total categories:  {{ $categoryCount }}</p>
                     <a href="{{route('admin.categories.index')}}" class="btn btn-primary">View All Categories</a>
                 </div>
             </div>

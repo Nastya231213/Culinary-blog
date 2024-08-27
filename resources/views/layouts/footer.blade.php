@@ -9,10 +9,9 @@
             <span class="footer-heading">Menu:</span>
 
             <ul>
-                <li><a href="#">Main</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Recipes</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="{{route('home')}}">Blog</a></li>
+                <li><a href="{{route('categories.index')}}">Categories of recipes</a></li>
+                <li><a href="{{route('contact')}}">Contact</a></li>
             </ul>
         </div>
         <div class="connect-with-us">

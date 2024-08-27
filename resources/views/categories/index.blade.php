@@ -1,11 +1,9 @@
 @extends('layouts.main_with_sidebar')
-@php
 
-@endphp
-@section('title', )
+@section('title', $title )
 @section('content')
 <div class="container_categories mt-4">
-    <h4>All categories</h4>
+    <h4>All {{$title}}</h4>
     <div class="row">
         @foreach($allCategories as $category)
         <div class="card col-sm-8 col-md-5 col-lg-3 mb-3 mt-3 mx-3 p-2">

@@ -3,6 +3,8 @@
 @section('content')
 
 <div class="main-content" id="mainContent">
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i>Go Back</a>
+
     <div class="container">
         <h4 class="my-4 text-center">User Management Dashboard</h4>
         <div class="mb-3 text-end">
@@ -54,9 +56,7 @@
                 </tbody>
             </table>
             @endif
-            <div class="mt-4 p-4">
-                {{ $users->links('pagination::bootstrap-5') }}
-            </div>
+        
         </div>
     </div>
 </div>

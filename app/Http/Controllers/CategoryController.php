@@ -16,11 +16,11 @@ class CategoryController extends Controller
         $data['allCategories'] = Category::where('parent_id', null)->paginate(5);
         return view('categories.index', $data);
     }
-    
+
     public function subcategories($category_id)
     {
         $data = $this->getPopularRecipesAndCategories();
-        $data['allCategories'] = Category::where('parent_id', $category_id)->paginate(5); 
+        $data['allCategories'] = Category::where('parent_id', $category_id)->paginate(5);
         return view('categories.index', $data);
     }
     private function getPopularRecipesAndCategories()

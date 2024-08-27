@@ -11,8 +11,12 @@
     @php
     $formattedDate = \Carbon\Carbon::parse($post->created_at)->format('F d, Y');
     @endphp
-    <div class="info">{{ $formattedDate }} - 0 comments</div>
-
+    <div class="info">
+        {{ $formattedDate }} - {{$post->comments_count}} comments
+        <span class="views">
+            <i class="bi bi-eye"></i> {{$post->views}}
+        </span>
+    </div>
     <div class="content_of_post">
         {!! Str::limit($post->content, 500) !!}
     </div>

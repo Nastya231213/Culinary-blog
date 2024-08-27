@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,7 +14,11 @@ class AdminController extends Controller
     public function index()
     {
 
-        return view('admin.dashboard');
+        $userCount=User::count();
+        $postCount=Post::count();
+        $categoryCount=Category::count();
+        $commentCount=Comment::count();
+        return view('admin.dashboard',compact('userCount','postCount','categoryCount'));
     }
 
     public function showUsers()
@@ -22,17 +27,19 @@ class AdminController extends Controller
         $users = User::paginate(7);
         return view('admin.users.list', compact('users'));
     }
-    public function showCategories()
-    {
-
-        $categories = Category::paginate(7);
-        return view('admin.categories.list', compact('categories'));
-    }
+ 
     public function showPosts()
     {
 
         $posts = Post::paginate(7);
         return view('admin.posts.list', compact('posts'));
+    }
+    public function showCategories()
+    {
+
+        $categories = Category::paginate(5);
+
+        return view('admin.categories.list', compact('categories'));
     }
     public function createUser()
     {
@@ -46,6 +53,7 @@ class AdminController extends Controller
         $categories = Category::whereNull('parent_id')->get();
         return view('admin.categories.create', compact('categories'));
     }
+
     public function createPost()
     {
 

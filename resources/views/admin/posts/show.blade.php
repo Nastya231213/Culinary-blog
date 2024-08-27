@@ -13,7 +13,7 @@
         $formattedDate=\Carbon\Carbon::parse($post->created_at)->format('F d, Y');
 
         @endphp
-        <div class="info">{{$formattedDate}} - 0 comments</div>
+        <div class="info">{{$formattedDate}} - {{$post->comments_count}} comments</div>
 
         <div class="content_of_post">
             {!! $post->content !!}

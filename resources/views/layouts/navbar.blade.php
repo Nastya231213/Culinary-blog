@@ -8,22 +8,30 @@
             <ul class="navbar-nav">
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-house-door-fill"></i>
-                    <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">HOME</a>
+                    <a class="nav-link {{request()->is('/') ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">HOME</a>
                 </li>
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-info-circle"></i>
-                    <a class="nav-link" href="#">ABOUT</a>
-                </li>
-                <li class="nav-item d-flex flex-column align-items-center">
-                    <i class="bi bi-cup"></i>
-                    <a class="nav-link" href="#">BLOG</a>
+                    <a class="nav-link {{request()->is('about')?'active':''}}" href="{{route('about')}}">ABOUT</a>
                 </li>
 
+                <li class="nav-item d-flex flex-column align-items-center">
+                    <i class="bi bi-telephone"></i>
+                    <a class="nav-link {{request()->is('contact')?'active':''}}" href="{{route('contact')}}">CONTACT</a>
+                </li>
+
+
                 @if(Auth::check())
+                @if(auth()->user()->is_admin)
+                <li class="nav-item d-flex flex-column align-items-center">
+                    <i class="bi bi-speedometer2"></i>
+                    <a class="nav-link {{request()->is('home')?'active':''}}" href="{{route('admin.dashboard')}}">ADMIN PANEL</a>
+                </li>
+                @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="profile-photo-wrapper">
-                            <img src="{{ auth()->user()->profile_photo_url ? asset('storage/profile_photos/' . auth()->user()->profile_photo) : asset('images/default_profile.jpg') }}" alt="Profile Photo" class="profile_photo me-2">
+                            <img src="{{ auth()->user()->profile_photo ? asset('storage/profile_photos/' . auth()->user()->profile_photo) : asset('images/default_profile.jpg') }}" alt="Profile Photo" class="profile_photo me-2">
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
@@ -39,6 +47,7 @@
                         </li>
                     </ul>
                 </li>
+
                 @else
                 <li class="nav-item d-flex flex-column align-items-center">
                     <i class="bi bi-box-arrow-in-left"></i>
@@ -79,31 +88,29 @@
 
                     @if($categoriesDisplayedInDropdown->count() > 0)
                     <li class="nav-item dropdown d-none d-lg-block">
-                        <a class="nav-link d-flex text-nowrap" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link  d-flex text-nowrap" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-chevron-right me-2" id="toggle-icon-categories"></i> More Categories
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="subcategoriesDropdown">
-                            <li class="dropdown-item">
+                        <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                            <li >
                                 <a class="nav-link" href="{{route('categories.index')}}">All categories</a>
                             </li>
                             @foreach($categoriesDisplayedInDropdown as $category)
-                            <li class="dropdown-item dropdown-submenu">
-                                <a class="nav-link" href="{{route('posts.category',$category->id)}}">{{ $category->name }}<i class="bi bi-chevron-right"></i></a>
+                            <li class="dropdown-submenu dropend">
+                                <a class="dropdown-item dropdown-toggle " href="{{route('posts.category',$category->id)}}">{{ $category->name }}</a>
                                 <ul class="dropdown-menu">
                                     @foreach($category->subcategories as $subcategory)
-                                    <li><a class="nav-link" href="{{route('posts.category',$subcategory->id)}}">{{ $subcategory->name }}</a></li>
+                                    <li><a class="dropdown-item" href="{{route('posts.category',$subcategory->id)}}">{{ $subcategory->name }}</a></li>
                                     @endforeach
                                 </ul>
-                            </li>
-                            <li class="dropdown-item dropdown-submenu">
-
                             </li>
                             @endforeach
                         </ul>
                     </li>
                     @endif
+
                     <li class="nav-item d-lg-none">
-                        <a class="nav-link" href="#">All categories</a>
+                        <a class="nav-link" href="{{route('categories.index')}}">All categories</a>
                     </li>
                 </ul>
 
@@ -135,8 +142,5 @@
         }
     });
 </script>
-
-</script>
-
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>

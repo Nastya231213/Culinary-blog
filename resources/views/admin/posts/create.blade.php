@@ -4,7 +4,8 @@
 
 <div class="main-content" id="mainContent">
 
-
+    <a href="{{route('admin.posts.index')}}" class="btn btn-primary">
+        <i class="bi bi-arrow-left"></i> All Posts</a>
     <form action="{{route('admin.posts.store')}}" id="add-user-form" method="POST" class="mx-auto border rounded p-4 content_of_post" enctype="multipart/form-data">
         <h1>Create Post</h1>
         <!-- Success Message -->

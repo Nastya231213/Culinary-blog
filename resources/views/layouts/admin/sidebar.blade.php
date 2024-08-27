@@ -12,40 +12,30 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('admin.users.index')}}">
                     <i class="bi bi-person"></i> Users
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi bi-journal-text"></i> Recipes
+                <a class="nav-link" href="{{route('admin.posts.index')}}">
+                    <i class="bi bi-journal-text"></i> Posts
                 </a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi bi-chat-left"></i> Comments
+                <a class="nav-link" href="{{route('admin.categories.index')}}">
+                    <i class="bi bi-tags-fill"></i>
+                    Categories
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi bi-gear"></i> Settings
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi bi-graph-up"></i> Analytics
-                </a>
-            </li>
+
+
             <li class="nav-item">
                 <a class="nav-link" href="/">
                     <i class="bi bi-house-door"></i> Back to Main Site
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi bi-box-arrow-left"></i> Logout
-                </a>
-            </li>
+
 
         </ul>
     </div>

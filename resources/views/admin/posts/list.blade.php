@@ -5,7 +5,10 @@
 @section('content')
 <div class="main-content" id="mainContent">
     <div class="container">
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i>Go Back</a>
+
         <h4 class="my-4 text-center">Posts Management Dashboard</h4>
+
         <div class="mb-3 text-end">
             <a href="{{ route('admin.posts.create') }}" class="btn btn-primary">
                 <i class="bi bi-plus"></i> Add New Post

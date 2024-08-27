@@ -4,6 +4,7 @@
 
 
 <div class="main-content" id="mainContent">
+
     <a href="{{route('admin.users.index')}}" class="btn btn-primary">
         <i class="bi bi-arrow-left"></i> All Users
     </a>

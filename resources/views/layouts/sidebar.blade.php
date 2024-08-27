@@ -2,9 +2,9 @@
          <img src="{{ asset('images/info-image.webp') }}" alt="Cover image">
          <p>Hello! I cook fresh, interesting recipes. My cat Cookie catches the crumbs.</p>
          <ul>
-             <li><a href="#">Contact</a></li>
-             <li><a href="#">New Here?</a></li>
-             <li><a href="#">All categories</a></li>
+             <li><a href="{{route('contact')}}">Contact</a></li>
+             <li><a href="{{route('register.form')}}">New Here?</a></li>
+             <li><a href="{{route('categories.index')}}">All categories</a></li>
          </ul>
      </div>
      <div class="popular-items">
